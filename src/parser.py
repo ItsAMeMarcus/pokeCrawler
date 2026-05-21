@@ -168,15 +168,27 @@ def _extract_image_url(soup: BeautifulSoup) -> str | None:
 
 
 def _extract_types(soup: BeautifulSoup) -> list[str]:
-    """Extrai a lista de tipos do Pokémon usando seletores de atributo."""
+    """
+    Extrai apenas os tipos principais do Pokémon, ignorando a tabela de efetividade.
+    Usa o padrão de 'Âncora e Contêiner' para isolar o escopo da busca.
+    """
     types = []
     
-    type_tags = soup.select('a[href$="_(type)"]')
+    type_label = soup.select_one('a[href="/wiki/Type"][title="Type"]')
+    
+    if not type_label:
+        return types
+        
+    parent_row = type_label.find_parent('tr')
+    
+    if not parent_row:
+        return types
+        
+    type_tags = parent_row.select('a[href$="_(type)"]')
     
     for tag in type_tags:
         type_name = tag.text.strip()
-        
-        if type_name and type_name not in types:
+        if type_name and type_name != "Unknown" and type_name not in types:
             types.append(type_name)
             
     return types
