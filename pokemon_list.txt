@@ -1,0 +1,7 @@
+Bulbasaur
+Ivysaur
+Venusaur
+Charmander
+Squirtle
+Pikachu
+Mewtwo

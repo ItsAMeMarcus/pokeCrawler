@@ -1,0 +1,10 @@
+services:
+  crawler:
+    build: .
+    container_name: pokecrawler
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DATA_DIR=/app/data
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1

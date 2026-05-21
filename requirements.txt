@@ -1,0 +1,4 @@
+aiohttp==3.13.5
+beautifulsoup4==4.14.3
+aiosqlite==0.22.1
+aiofiles==25.1.0
